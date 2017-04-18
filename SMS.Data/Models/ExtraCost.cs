@@ -10,7 +10,20 @@ namespace SMS.Data.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-    
+
+        private DateTime _DateEntered = DateTime.Now;
+        public DateTime DateEntered
+        {
+            get
+            {
+                return _DateEntered;
+            }
+            set
+            {
+                _DateEntered = value;
+            }
+        }
+
         [ForeignKey("Trader")]
         public int TraderId { get; set; }
 

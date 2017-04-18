@@ -7,13 +7,13 @@ namespace SMS.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initialisedatabase : IMigrationMetadata
+    public sealed partial class initialisation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialisedatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialisation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704121234466_initialise database"; }
+            get { return "201704180948452_initialisation "; }
         }
         
         string IMigrationMetadata.Source

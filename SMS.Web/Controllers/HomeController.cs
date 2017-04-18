@@ -11,35 +11,35 @@ namespace SMS.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        //GET - Dashboard
         public ActionResult Index()
         {
-            var newTrader = new Trader();
-            newTrader.IsActive = false;
-            return View(newTrader);
+            if (Session["UserId"] == null)
+            {
+               return RedirectToAction("Index", "Account");
+            }
+            return View();
         }
         //POST
         [HttpPost]
         public ActionResult Index(Trader obj)
         {
-            if (ModelState.IsValid)
-            {
-                db.Trader.Add(new Trader
-                {
-                    Name = obj.Name,
-                    Address = obj.Address,
-                    Email = obj.Email,
-                    PhoneNumber = obj.PhoneNumber,
-                    CurrentPassword = obj.CurrentPassword
+            return View();   
+        }
 
-                });
-                db.SaveChanges();
-                return View();
-            }
-            
-            else{
-                return View();
-            }
-            
+        //GET - Vehicle
+        public ViewResult AddVehicle()
+        {
+
+            return View();
+        }
+
+        //POST - Vehicle
+        [HttpPost]
+        public ViewResult AddVehicle()
+        {
+
+            return View();
         }
 
     }

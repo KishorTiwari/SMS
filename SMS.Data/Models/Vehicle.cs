@@ -11,6 +11,18 @@ namespace SMS.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        private DateTime _DateEntered = DateTime.Now;
+        public DateTime DateEntered {
+            get
+            {
+                return _DateEntered;
+            }
+            set
+            {
+                _DateEntered = value;
+            }
+        }
+
         [Required(ErrorMessage = "Please enter vehicle make")]
         [Display(Name = "Make")]
         [MaxLength(50)]
@@ -24,8 +36,11 @@ namespace SMS.Data.Models
         [Required(ErrorMessage = "Please enter Kilometers")]
         [Display(Name = "Kilometers")]
         public int? Kilometers { get; set; }
+       
+        [MaxLength(10)]
+        [Display(Name = "Rego")]
+        public string Rego { get; set; }
 
-        [Required(ErrorMessage = "Please enter cost price")]
         [Display(Name = "Cost Price")]
         public float? CostPrice { get; set; }
 
@@ -44,6 +59,7 @@ namespace SMS.Data.Models
                 _IsSold = value;
             }
         }
+        public DateTime DateSold { get; set; }
 
         public virtual Trader Trader { get; set; }
         public virtual ICollection<ExtraCost> ExtraCost { get; set; }

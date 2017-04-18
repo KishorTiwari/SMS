@@ -12,6 +12,19 @@ namespace SMS.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        private DateTime _DateCreated = DateTime.Now;
+        public DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                _DateCreated = value;
+            }
+        }
+
         [Required(ErrorMessage = "Please enter your company name.")]
         [Display(Name = "Name")]
         [MaxLength(50)]

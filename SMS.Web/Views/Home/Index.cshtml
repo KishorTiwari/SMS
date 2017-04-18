@@ -1,36 +1,5 @@
 ﻿@model SMS.Data.Models.Trader
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Stock";
 }
-
-<h2>Sign Up</h2>
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary()
-    <div class="container">
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name)
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter your company name"})
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Address)
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" , @placeholder = "Enter your address" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PhoneNumber)
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" , @value = "", @placeholder = "Enter your phone number" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email) 
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })           
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.CurrentPassword)
-            @Html.PasswordFor(m => m.CurrentPassword, new { @class = "form-control" , @placeholder = "Enter your password" , @type = "password"})      
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-default"/>
-        </div>
-    </div>
-}
-
+<h2>Welcome @Session["UserName"]</h2>
