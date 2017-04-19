@@ -24,13 +24,21 @@ namespace SMS.Web.Controllers
             {
                using(SMSContext db = new SMSContext())
                 {
-                    var usr = db.Trader.Single(x => x.Email == login.Email && x.CurrentPassword == login.Password);
-                    if (usr != null)
+                    try
                     {
-                        Session["UserId"] = usr.Id;
-                        Session["UserName"] = usr.Name;
-                        return RedirectToAction("Index", "Home");
+                        var usr = db.Trader.Single(x => x.Email == login.Email && x.Password == login.Password);
+                        if (usr != null)
+                        {
+                            Session["UserId"] = usr.Id;
+                            Session["UserName"] = usr.Name;
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
+                    catch(Exception e)
+                    {
+                        ViewBag.Message = "Inavlid Login. Please try again.";
+                    }
+                    
                 }
             }
             return View();
@@ -42,15 +50,19 @@ namespace SMS.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(Trader trader)
+        public ActionResult Register(TraderViewModel trader)
         {
             if (ModelState.IsValid)
             {
                 using(SMSContext db = new SMSContext())
                 {
-                    db.Trader.Add(trader);
+                    AutoMapper.Mapper.Initialize(c =>
+                    {
+                        c.CreateMap<TraderViewModel, Trader>();
+                    });
+                    var newTrader = AutoMapper.Mapper.Map<TraderViewModel, Trader>(trader);
+                    db.Trader.Add(newTrader);
                     db.SaveChanges();
-
                 }
                 ModelState.Clear();
                 ViewBag.Message = "Thank You !" + trader.Name + " has been successfully registered.";

@@ -38,8 +38,6 @@ namespace SMS.Data.ViewModels
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Please enter your phone number.")]
-        [MaxLength(20, ErrorMessage = "Phone number cannot be more than 20 charactor long")]
-        [MinLength(8, ErrorMessage = "Phone number should  be at least charactor long")]
         [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
 
@@ -52,6 +50,7 @@ namespace SMS.Data.ViewModels
         [Required(ErrorMessage = "Please enter your password")]
         [Display(Name = "Password")]
         [MaxLength(255)]
+        [MinLength(6, ErrorMessage = "Password must be at least 6 character long.")]
         public string Password { get; set; }
 
         [Required]
@@ -72,8 +71,5 @@ namespace SMS.Data.ViewModels
                 _IsActive = value;
             }
         }
-        public virtual ICollection<Vehicle> Vehicle { get; set; }
-        public virtual ICollection<ExtraCost> ExtraCost { get; set; }
-
     }
 }

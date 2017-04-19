@@ -1,4 +1,4 @@
-﻿using SMS.Data.Model;
+﻿using SMS.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +40,5 @@ namespace SMS.Data.ViewModels
         [Required]
         public float Cost { get; set; }
 
-        public virtual Trader Trader { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using SMS.Data.Model;
-using SMS.Data.Models;
+﻿using SMS.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -65,9 +64,5 @@ namespace SMS.Data.ViewModels
             }
         }
         public DateTime DateSold { get; set; }
-
-        public virtual Trader Trader { get; set; }
-        public virtual ICollection<ExtraCost> ExtraCost { get; set; }
-
     }
 }

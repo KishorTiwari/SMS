@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using SMS.Data.Model;
 
 namespace SMS.Data.Models
 {

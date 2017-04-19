@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using SMS.Data.Models;
 
-namespace SMS.Data.Model
+namespace SMS.Data.Models
 {
     public class Trader
     {
@@ -25,7 +25,6 @@ namespace SMS.Data.Model
         public string Address { get; set; }
 
         [Required]
-        [MaxLength(20)]
         public int PhoneNumber { get; set; }
 
         [Required]
