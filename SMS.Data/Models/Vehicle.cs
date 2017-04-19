@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SMS.Data.Model;
 
 namespace SMS.Data.Models
 {
@@ -11,54 +12,28 @@ namespace SMS.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        private DateTime _DateEntered = DateTime.Now;
-        public DateTime DateEntered {
-            get
-            {
-                return _DateEntered;
-            }
-            set
-            {
-                _DateEntered = value;
-            }
-        }
+        public DateTime DateEntered { get; set; }
 
-        [Required(ErrorMessage = "Please enter vehicle make")]
-        [Display(Name = "Make")]
+        [Required]       
         [MaxLength(50)]
         public string Make { get; set; }
 
-        [Required(ErrorMessage = "Please enter vehicle model")]
-        [Display(Name = "Model")]
+        [Required]
         [MaxLength(50)]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Please enter Kilometers")]
-        [Display(Name = "Kilometers")]
-        public int? Kilometers { get; set; }
+        [Required]
+        public int Kilometers { get; set; }
        
         [MaxLength(10)]
-        [Display(Name = "Rego")]
         public string Rego { get; set; }
 
-        [Display(Name = "Cost Price")]
         public float? CostPrice { get; set; }
 
-        [Display(Name = "Selling Price")]
         public float? SellingPrice { get; set; }
 
-        private Boolean _IsSold = false;
-        public Boolean IsSold
-        {
-            get
-            {
-                return _IsSold;
-            }
-            set
-            {
-                _IsSold = value;
-            }
-        }
+        public Boolean IsSold{ get; set; }
+
         public DateTime DateSold { get; set; }
 
         public virtual Trader Trader { get; set; }

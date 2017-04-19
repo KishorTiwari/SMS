@@ -36,7 +36,7 @@ namespace SMS.Web.Controllers
 
         //POST - Vehicle
         [HttpPost]
-        public ViewResult AddVehicle()
+        public ViewResult AddVehicle(Vehicle vehicle)
         {
 
             return View();

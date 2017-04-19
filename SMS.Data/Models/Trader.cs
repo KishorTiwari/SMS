@@ -4,8 +4,9 @@ using System.Text;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SMS.Data.Models;
 
-namespace SMS.Data.Models
+namespace SMS.Data.Model
 {
     public class Trader
     {
@@ -13,62 +14,33 @@ namespace SMS.Data.Models
         public int Id { get; set; }
 
         private DateTime _DateCreated = DateTime.Now;
-        public DateTime DateCreated
-        {
-            get
-            {
-                return _DateCreated;
-            }
-            set
-            {
-                _DateCreated = value;
-            }
-        }
+        public DateTime DateCreated{ get; set; }
 
-        [Required(ErrorMessage = "Please enter your company name.")]
-        [Display(Name = "Name")]
-        [MaxLength(50)]
+        [Required]        
+        [MaxLength(255)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter your Address.")]
-        [Display(Name = "Address")]
+        [Required]
         [MaxLength(255)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Please enter your phone number.")]
-        [Display(Name = "Phone Number")]
+        [Required]
+        [MaxLength(20)]
         public int PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Please enter your email.")]
-        [EmailAddress(ErrorMessage = "Please enter valid email address.")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Please enter valid email address")]
-        [Display(Name = "Email")]
+        [Required]
         [MaxLength(255)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter your password")]
-        [Display(Name = "Password")]
+        [Required]
         [MaxLength(255)]
-        public string CurrentPassword { get; set; }
-
-        [MaxLength(255)]
-        public string OldPassword { get; set; }
+        public string Password { get; set; }
 
         [MaxLength(255)]
         public string TempPassword { get; set; }
 
-        private Boolean _IsActive = true;
-        public Boolean IsActive {
+        public Boolean IsActive { get; set; }
 
-            get
-            {
-                return _IsActive;
-            }
-            set
-            {
-                _IsActive = value;
-            }
-        }
         public virtual ICollection<Vehicle> Vehicle { get; set; }
         public virtual ICollection<ExtraCost> ExtraCost { get; set; }
        

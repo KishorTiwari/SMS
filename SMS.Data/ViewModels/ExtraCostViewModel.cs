@@ -1,21 +1,36 @@
-﻿using System;
+﻿using SMS.Data.Model;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using SMS.Data.Model;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SMS.Data.Models
+namespace SMS.Data.ViewModels
 {
-    public class ExtraCost
+    public class ExtraCostViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public DateTime DateEntered { get; set; }
-     
+        private DateTime _DateEntered = DateTime.Now;
+        public DateTime DateEntered
+        {
+            get
+            {
+                return _DateEntered;
+            }
+            set
+            {
+                _DateEntered = value;
+            }
+        }
+
+        [ForeignKey("Trader")]
         public int TraderId { get; set; }
 
+        [ForeignKey("Vehicle")]
         public int VehicleId { get; set; }
 
         [Required]
