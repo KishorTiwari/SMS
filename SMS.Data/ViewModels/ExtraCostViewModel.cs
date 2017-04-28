@@ -26,11 +26,8 @@ namespace SMS.Data.ViewModels
                 _DateEntered = value;
             }
         }
-
-        [ForeignKey("Trader")]
         public int TraderId { get; set; }
 
-        [ForeignKey("Vehicle")]
         public int VehicleId { get; set; }
 
         [Required]

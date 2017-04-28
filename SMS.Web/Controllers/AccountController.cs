@@ -11,6 +11,7 @@ namespace SMS.Web.Controllers
 {
     public class AccountController : BaseController
     {
+        int usr_id = 0;
         //Login
         public ActionResult Index()
         {           
@@ -29,8 +30,9 @@ namespace SMS.Web.Controllers
                         var usr = db.Trader.Single(x => x.Email == login.Email && x.Password == login.Password);
                         if (usr != null)
                         {
-                            Session["UserId"] = usr.Id;
+                            Session["UserId"] = usr.Id; 
                             Session["UserName"] = usr.Name;
+                            usr_id = usr.Id;
                             return RedirectToAction("Index", "Home");
                         }
                     }
@@ -68,6 +70,6 @@ namespace SMS.Web.Controllers
                 ViewBag.Message = "Thank You !" + trader.Name + " has been successfully registered.";
             }
             return View();
-        }
+        }       
     }
 }

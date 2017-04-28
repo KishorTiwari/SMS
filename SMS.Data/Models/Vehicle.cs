@@ -11,6 +11,8 @@ namespace SMS.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int TraderId { get; set; }
+
         public DateTime DateEntered { get; set; }
 
         [Required]       
@@ -33,8 +35,8 @@ namespace SMS.Data.Models
 
         public Boolean IsSold{ get; set; }
 
-        public DateTime DateSold { get; set; }
-
+        public DateTime? DateSold { get; set; }
+        
         public virtual Trader Trader { get; set; }
         public virtual ICollection<ExtraCost> ExtraCost { get; set; }
     }

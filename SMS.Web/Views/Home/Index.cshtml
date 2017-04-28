@@ -1,5 +1,73 @@
-﻿@model SMS.Data.Models.Trader
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SMS.Data.Models.Vehicle>
 @{
     ViewBag.Title = "Stock";
-}
+} 
 <h2>Welcome @Session["UserName"]</h2>
+<div>
+    <table class="table table-bordered" id="table-dashboard">
+        <thead>
+            <tr>
+                <th class="w5">Stock No</th>
+                <th class="w75">Date</th>
+                <th class="w75">Make</th>
+                <th class="w75">Model</th>
+                <th class="w5">Rego</th>
+                <th class="w5">Kilometers</th>
+                <th class="w5">Cost Price</th>
+                <th class="w5">S. Price</th>
+                <th class="w15">Extra Costs</th>
+                <th class="w10">Profit</th>
+                <th class="w5">Status</th>
+                <th class="w75">Sold Date</th>
+                <th class="w10">Action</th>
+            </tr>
+        </thead>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td class="w5">@v.Id</td>
+                <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateEntered)</td>
+                <td class="w75">@v.Make</td>
+                <td class="w75">@v.Model</td>
+                <td class="w5">@v.Rego</td>
+                <td class="w5">@String.Format("{0:0,#}", v.Kilometers)</td>
+                <td class="w5">@String.Format("{0:c}", v.CostPrice)</td>
+                <td class="w5">@String.Format("{0:c}", v.SellingPrice)</td>              
+                <td class="w15">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <tbody>
+                        @{float total = 0;}
+                        @foreach (var c in v.ExtraCost)
+                        {
+                                    @*<td>@c.Description</td>
+                                    <td>@String.Format("{0:c}", c.Cost)</td>
+                                    <td><button class="btn btn-sm">@Html.ActionLink("Update", "UpdateExtras", "Home", routeValues: new { e_id = c.Id}, htmlAttributes: null)</button></td>
+                                    <td>@using (Html.BeginForm("DeleteExtra", "Home", FormMethod.Post)) { @Html.Hidden("e_id", c.Id) <button type="submit" class="btn btn-danger">Delete</button>}</td>*@
+                                    total += c.Cost;                             
+                            }
+                            <tr>
+                                @if (total != 0)
+                                {
+                                <td align="left">Total: @String.Format("{0:c}", total)</td>
+                                <td align="center">@Html.ActionLink("View", "ExtraDetails", "Home", routeValues: new { id = v.Id}, htmlAttributes: new { @class = "btn btn-primary"})</td>
+                                }
+                                <td align="right">@Html.ActionLink("Add Extras", "AddExtras", "Home", routeValues: new { id = v.Id }, htmlAttributes: new { @class = "btn btn-primary"})</td>
+                            </tr>                      
+                        </tbody>
+                    </table>
+                </td>
+                @{ 
+                    float? profit = (v.SellingPrice - (v.CostPrice+ total));
+                    float? profitPercentage = profit / (v.CostPrice + total) * 100;
+                }
+                <td class="w10">@String.Format("{0:c}", profit) | @profitPercentage%</td>
+                <td class="w5 @(v.IsSold ? "item-sold": "item-not-sold")"></td>
+                <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateSold)</td>
+                <td class="w10"></td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, page=>Url.Action("Index", "Home", routeValues: new { page}))
+</div>

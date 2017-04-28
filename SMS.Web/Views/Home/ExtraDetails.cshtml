@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SMS.Data.Models.ExtraCost>
+
+@{
+    ViewBag.Title = "ExtraDetails";
+}
+
+<h2>ExtraDetails</h2>
+
+<table class="table table-bordered" id="table-extra">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEntered) |
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>Action</th>
+    </tr>
+    @{ float total = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEntered) | @Html.DisplayFor(m => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @string.Format("{0:c}", item.Cost)
+                @{ total = +item.Cost;}
+            </td>
+            <td>
+                @using (Html.BeginForm("DeleteExtra", "Home", FormMethod.Post))
+                { @Html.Hidden("e_id", item.Id) @Html.Hidden("v_id", item.VehicleId)<button type="submit" class="btn btn-danger">Delete</button>
+                @Html.ActionLink("Edit", "UpdateExtras", routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                }
+            </td>
+
+        </tr>
+                    }
+    <tr>
+        <td colspan="4" align="right">Total Cost: @string.Format("{0:c}", total)</td>
+    </tr>
+
+</table>

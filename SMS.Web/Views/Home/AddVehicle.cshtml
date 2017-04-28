@@ -1,7 +1,7 @@
-﻿@model SMS.Data.Models.Vehicle
+﻿@model SMS.Data.ViewModels.VehicleViewModel
 
 @{
-    ViewBag.Title = "Add a New Vehicle";
+    ViewBag.Title = "AddVehicle";
 }
 
 <h2>AddVehicle</h2>
@@ -12,17 +12,9 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Vehicle</h4>
+        <h4>VehicleViewModel</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateEntered, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateEntered, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateEntered, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })    
         <div class="form-group">
             @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -91,14 +83,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Add" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

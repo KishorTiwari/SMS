@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace SMS.Data.ViewModels
 {
-    public class Vehicle
+    public class VehicleViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        public int TraderId { get; set; }
 
         private DateTime _DateEntered = DateTime.Now;
         public DateTime DateEntered
@@ -39,8 +41,9 @@ namespace SMS.Data.ViewModels
 
         [Required(ErrorMessage = "Please enter Kilometers")]
         [Display(Name = "Kilometers")]
-        public int? Kilometers { get; set; }
+        public int Kilometers { get; set; }
 
+        [Required(ErrorMessage = "Please enter Registration Number")]
         [MaxLength(10)]
         [Display(Name = "Rego")]
         public string Rego { get; set; }
@@ -63,6 +66,6 @@ namespace SMS.Data.ViewModels
                 _IsSold = value;
             }
         }
-        public DateTime DateSold { get; set; }
+        public DateTime? DateSold { get; set; }
     }
 }

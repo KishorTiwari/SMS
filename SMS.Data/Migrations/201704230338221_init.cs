@@ -3,7 +3,7 @@ namespace SMS.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialise : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -45,6 +45,7 @@ namespace SMS.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        TraderId = c.Int(nullable: false),
                         DateEntered = c.DateTime(nullable: false),
                         Make = c.String(nullable: false, maxLength: 50),
                         Model = c.String(nullable: false, maxLength: 50),
@@ -54,20 +55,19 @@ namespace SMS.Data.Migrations
                         SellingPrice = c.Single(),
                         IsSold = c.Boolean(nullable: false),
                         DateSold = c.DateTime(nullable: false),
-                        Trader_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Trader", t => t.Trader_Id)
-                .Index(t => t.Trader_Id);
+                .ForeignKey("dbo.Trader", t => t.TraderId, cascadeDelete: false)
+                .Index(t => t.TraderId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Vehicle", "Trader_Id", "dbo.Trader");
+            DropForeignKey("dbo.Vehicle", "TraderId", "dbo.Trader");
             DropForeignKey("dbo.ExtraCost", "VehicleId", "dbo.Vehicle");
             DropForeignKey("dbo.ExtraCost", "TraderId", "dbo.Trader");
-            DropIndex("dbo.Vehicle", new[] { "Trader_Id" });
+            DropIndex("dbo.Vehicle", new[] { "TraderId" });
             DropIndex("dbo.ExtraCost", new[] { "VehicleId" });
             DropIndex("dbo.ExtraCost", new[] { "TraderId" });
             DropTable("dbo.Vehicle");

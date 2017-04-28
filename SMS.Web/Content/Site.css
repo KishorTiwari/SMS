@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-size: 12px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -12,10 +13,62 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
+
+/*width set by % */
+.w5{
+    width: 5%;
+}
+.w75{
+    width: 7.5%;
+}
+.w10{
+    width: 10%;
+}
+.w15{
+    width: 15%;
+}
+.w20 {
+    width: 20%;
+}
+.w30 {
+    width: 30%;
+}
+.w40 {
+    width: 40%;
+}
+.w50 {
+    width: 50%;
+}
+.w60 {
+    width: 60%;
+}
+.w70 {
+    width: 70%;
+}
+.w80 {
+    width: 80%;
+}
+.w90 {
+    width: 90%;
+}
+.w100 {
+    width: 100%;
+}
+.borderless{
+    border-top: 0px;
+    border: 0px;
+}
+body > .container{
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
+#table-dashboard th, #table-extra th {
+    background-color: #ffa400;
+}
+#table-dashboard .table {
+    margin-bottom: 0px;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -24,5 +77,24 @@ textarea {
 }
 .input-validation-error{
     border: 1px solid red;
+}
+
+.item-sold{
+    background-color: forestgreen;
+}
+.item-not-sold {
+    background-color: #808080;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+    } 
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 100%;
+    }
 }
 
