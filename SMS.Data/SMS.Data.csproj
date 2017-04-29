@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\SMSContext.cs" />
+    <Compile Include="enums\VehicleStatus.cs" />
     <Compile Include="Migrations\201704230338221_init.cs" />
     <Compile Include="Migrations\201704230338221_init.Designer.cs">
       <DependentUpon>201704230338221_init.cs</DependentUpon>
@@ -65,9 +66,13 @@
     <Compile Include="Migrations\201704232054206_dateSold to Optional.Designer.cs">
       <DependentUpon>201704232054206_dateSold to Optional.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704232211035_error--.cs" />
-    <Compile Include="Migrations\201704232211035_error--.Designer.cs">
-      <DependentUpon>201704232211035_error--.cs</DependentUpon>
+    <Compile Include="Migrations\201704290551179_init1.cs" />
+    <Compile Include="Migrations\201704290551179_init1.Designer.cs">
+      <DependentUpon>201704290551179_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704290911174_init2.cs" />
+    <Compile Include="Migrations\201704290911174_init2.Designer.cs">
+      <DependentUpon>201704290911174_init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExtraCost.cs" />
@@ -96,8 +101,11 @@
     <EmbeddedResource Include="Migrations\201704232054206_dateSold to Optional.resx">
       <DependentUpon>201704232054206_dateSold to Optional.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704232211035_error--.resx">
-      <DependentUpon>201704232211035_error--.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704290551179_init1.resx">
+      <DependentUpon>201704290551179_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704290911174_init2.resx">
+      <DependentUpon>201704290911174_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,7 +41,7 @@ namespace SMS.Web.Controllers
                                       select v;
                     return View(vehicleList.ToList().ToPagedList(page ?? 1, 15));
                 }
-                catch (NullReferenceException e)
+                catch (NullReferenceException ex)
                 {
                     ViewBag.NullMessage = "Your Stock is Empty. Go to Vehicles to add new Vehilce.";
                     return null;
@@ -55,6 +55,24 @@ namespace SMS.Web.Controllers
         public ActionResult Index(Trader obj)
         {
             return View();
+        }
+
+        //Get - Edit vehicle
+        public ActionResult EditVehicle(int? Id)
+        {
+            if(Id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            using(var db = new SMSContext())
+            {
+                var v = db.Vehicle.Find(Id);
+                if(v == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(v);               
+            }
         }
 
         //GET - Vehicle
@@ -79,7 +97,7 @@ namespace SMS.Web.Controllers
                     Rego = vehicle.Rego,
                     CostPrice = vehicle.CostPrice,
                     SellingPrice = vehicle.SellingPrice,
-                    IsSold = vehicle.IsSold,
+                    Status = vehicle.Status,
                     DateSold = vehicle.DateSold,
                     TraderId = Convert.ToInt32(Session["UserId"])
                 };

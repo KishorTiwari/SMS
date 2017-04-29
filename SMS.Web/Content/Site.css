@@ -54,6 +54,15 @@
 .w100 {
     width: 100%;
 }
+.blue{
+    color: blue;
+}
+.green{
+    color:green;
+}
+.red{
+    color:red;
+}
 .borderless{
     border-top: 0px;
     border: 0px;
@@ -84,6 +93,15 @@ textarea {
 }
 .item-not-sold {
     background-color: #808080;
+}
+.item-pending{
+    background-color: red;
+} 
+.v-status{
+    padding: 0px 10px;
+    color: white;
+    font-size: 13px;
+    font-weight:600;
 }
 
 @media (min-width: 1200px) {

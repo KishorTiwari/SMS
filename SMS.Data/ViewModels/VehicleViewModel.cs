@@ -54,18 +54,10 @@ namespace SMS.Data.ViewModels
         [Display(Name = "Selling Price")]
         public float? SellingPrice { get; set; }
 
-        private Boolean _IsSold = false;
-        public Boolean IsSold
-        {
-            get
-            {
-                return _IsSold;
-            }
-            set
-            {
-                _IsSold = value;
-            }
-        }
+        [Required]
+        [Display(Name = "Status")]
+        [MaxLength(1)]
+        public int Status { get; set; }
         public DateTime? DateSold { get; set; }
     }
 }

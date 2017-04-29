@@ -33,9 +33,9 @@
                 <td class="w75">@v.Model</td>
                 <td class="w5">@v.Rego</td>
                 <td class="w5">@String.Format("{0:0,#}", v.Kilometers)</td>
-                <td class="w5">@String.Format("{0:c}", v.CostPrice)</td>
-                <td class="w5">@String.Format("{0:c}", v.SellingPrice)</td>              
-                <td class="w15">
+                <td class="w5 blue">@String.Format("{0:c}", v.CostPrice)</td>
+                <td class="w5 green">@String.Format("{0:c}", v.SellingPrice)</td>              
+                <td class="w15 red">
                     <table class="table table-bordered table-striped table-condensed">
                         <tbody>
                         @{float total = 0;}
@@ -63,7 +63,12 @@
                     float? profitPercentage = profit / (v.CostPrice + total) * 100;
                 }
                 <td class="w10">@String.Format("{0:c}", profit) | @profitPercentage%</td>
-                <td class="w5 @(v.IsSold ? "item-sold": "item-not-sold")"></td>
+                @*<td class="w5 @(v.IsSold ? "item-sold": "") @(v.IsPending? "item-pending": "") @(!v.IsSold && !v.IsPending ? "item-not-sold": "")">
+                    @{ if (v.IsSold) {<span class="v-status">Sold</span>}; if (v.IsPending) {<sapn class="v-status">Pending</sapn> }
+                        else if(!v.IsSold && !v.IsPending) { <span class="v-status">Available</span>}
+                    }
+                </td>*@
+                <td class="w10">Status</td>
                 <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateSold)</td>
                 <td class="w10"></td>
             </tr>

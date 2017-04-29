@@ -33,7 +33,7 @@ namespace SMS.Data.Models
 
         public float? SellingPrice { get; set; }
 
-        public Boolean IsSold{ get; set; }
+        public int Status { get; set; }
 
         public DateTime? DateSold { get; set; }
         
