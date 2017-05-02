@@ -32,9 +32,9 @@ namespace SMS.Data.Models
         public string Rego { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
-        public float? CostPrice { get; set; }
+        public decimal? CostPrice { get; set; }
 
-        public float? SellingPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
 
         public int Status { get; set; }
 

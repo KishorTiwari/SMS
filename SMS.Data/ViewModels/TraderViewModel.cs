@@ -14,7 +14,7 @@ namespace SMS.Data.ViewModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        private DateTime _DateCreated = DateTime.Now;
+        private DateTime _DateCreated = DateTime.UtcNow;
         public DateTime DateCreated
         {
             get

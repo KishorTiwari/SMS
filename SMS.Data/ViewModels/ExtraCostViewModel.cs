@@ -14,7 +14,7 @@ namespace SMS.Data.ViewModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        private DateTime _DateEntered = DateTime.Now;
+        private DateTime _DateEntered = DateTime.UtcNow;
         public DateTime DateEntered
         {
             get
@@ -35,7 +35,7 @@ namespace SMS.Data.ViewModels
         public string Description { get; set; }
 
         [Required]
-        public float Cost { get; set; }
+        public decimal Cost { get; set; }
 
     }
 }

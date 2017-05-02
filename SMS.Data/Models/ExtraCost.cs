@@ -22,7 +22,7 @@ namespace SMS.Data.Models
         public string Description { get; set; }
 
         [Required]
-        public float Cost { get; set; }
+        public decimal Cost { get; set; }
 
         public virtual Trader Trader { get; set; }
         public virtual Vehicle Vehicle { get; set; }

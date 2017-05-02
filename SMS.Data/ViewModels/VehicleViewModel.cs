@@ -17,7 +17,7 @@ namespace SMS.Data.ViewModels
 
         public int TraderId { get; set; }
 
-        private DateTime _DateEntered = DateTime.Now;
+        private DateTime _DateEntered = DateTime.UtcNow;
         public DateTime DateEntered
         {
             get
@@ -53,10 +53,10 @@ namespace SMS.Data.ViewModels
 
         [DataType(DataType.Currency)]
         [Display(Name = "Cost Price")]
-        public float? CostPrice { get; set; }
+        public decimal? CostPrice { get; set; }
 
         [Display(Name = "Selling Price")]
-        public float? SellingPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
 
         [Required]
         [Display(Name = "Status")]
