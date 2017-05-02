@@ -28,7 +28,7 @@ namespace SMS.Web.Controllers
             }
         }
         //GET - Dashboard
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, int? status)
         {
             using (SMSContext db = new SMSContext())
             {
@@ -39,7 +39,11 @@ namespace SMS.Web.Controllers
                     var vehicleList = from v in db.Vehicle.Include("ExtraCost")
                                       where v.TraderId == usr_id
                                       select v;
-                    return View(vehicleList.ToList().ToPagedList(page ?? 1, 15));
+                    if (status != null)
+                    {
+                        vehicleList = vehicleList.Where(v => v.Status == status);
+                    }
+                    return View(vehicleList.ToList().ToPagedList(page ?? 1, 5));
                 }
                 catch (NullReferenceException ex)
                 {
@@ -60,18 +64,71 @@ namespace SMS.Web.Controllers
         //Get - Edit vehicle
         public ActionResult EditVehicle(int? Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return RedirectToAction("Index");
             }
-            using(var db = new SMSContext())
+            using (var db = new SMSContext())
             {
                 var v = db.Vehicle.Find(Id);
-                if(v == null)
+                if (v == null)
                 {
                     return RedirectToAction("Index");
                 }
-                return View(v);               
+                var vm = new VehicleViewModel()
+                {
+                    Id = v.Id,
+                    TraderId = v.TraderId,
+                    DateEntered = v.DateEntered,
+                    Make = v.Make,
+                    Model = v.Model,
+                    Kilometers = v.Kilometers,
+                    Rego = v.Rego,
+                    CostPrice = v.CostPrice,
+                    SellingPrice = v.SellingPrice,
+                    Status = v.Status,
+                    DateSold = v.DateSold
+                };
+                return View(vm);
+            }
+        }
+
+        //POST - Edit vehicle
+        [HttpPost]
+        public ActionResult EditVehicle(VehicleViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using (var db = new SMSContext())
+            {
+                var v = db.Vehicle.Find(vm.Id);
+                v.Make = vm.Make;
+                v.Model = vm.Model;
+                v.Kilometers = vm.Kilometers;
+                v.Rego = vm.Rego;
+                v.CostPrice = vm.CostPrice;
+                v.SellingPrice = vm.SellingPrice;
+                v.Status = vm.Status;
+                v.DateSold = vm.DateSold;
+                db.SaveChanges();
+
+                ModelState.Clear();
+                return View();
+            }
+        }
+
+        //Get - Delete Vehicle
+        public ActionResult DeleteVehicle(int id)
+        {
+            using (var db = new SMSContext())
+            {
+                var vdel = db.Vehicle.Find(id);
+                db.Vehicle.Remove(vdel);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
         }
 
@@ -86,27 +143,31 @@ namespace SMS.Web.Controllers
         [HttpPost]
         public ViewResult AddVehicle(VehicleViewModel vehicle)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var newVehicle = new Vehicle()
-                {
-                    DateEntered = vehicle.DateEntered,
-                    Make = vehicle.Make,
-                    Model = vehicle.Model,
-                    Kilometers = vehicle.Kilometers,
-                    Rego = vehicle.Rego,
-                    CostPrice = vehicle.CostPrice,
-                    SellingPrice = vehicle.SellingPrice,
-                    Status = vehicle.Status,
-                    DateSold = vehicle.DateSold,
-                    TraderId = Convert.ToInt32(Session["UserId"])
-                };
-                using (SMSContext db = new SMSContext())
-                {
-                    db.Vehicle.Add(newVehicle);
-                    db.SaveChanges();
-                }
+                return View();
             }
+
+            var newVehicle = new Vehicle()
+            {
+                DateEntered = vehicle.DateEntered,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Kilometers = vehicle.Kilometers,
+                Rego = vehicle.Rego,
+                CostPrice = vehicle.CostPrice,
+                SellingPrice = vehicle.SellingPrice,
+                Status = vehicle.Status,
+                DateSold = vehicle.DateSold,
+                TraderId = Convert.ToInt32(Session["UserId"])
+            };
+            using (SMSContext db = new SMSContext())
+            {
+                db.Vehicle.Add(newVehicle);
+                db.SaveChanges();
+            }
+            ModelState.Clear();
+            ViewBag.Message = "Vehicle Added !";
 
             return View();
         }
@@ -200,7 +261,7 @@ namespace SMS.Web.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("ExtraDetails", new { id = v_id});
+            return RedirectToAction("ExtraDetails", new { id = v_id });
         }
 
 

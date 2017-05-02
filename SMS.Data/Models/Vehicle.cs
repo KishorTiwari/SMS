@@ -29,6 +29,7 @@ namespace SMS.Data.Models
         [MaxLength(10)]
         public string Rego { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public float? CostPrice { get; set; }
 
         public float? SellingPrice { get; set; }

@@ -76,6 +76,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExtraCost.cs" />
+    <Compile Include="Validations\DateNowAttribute.cs" />
+    <Compile Include="Validations\StatusSoldAttribute.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\ExtraCostViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

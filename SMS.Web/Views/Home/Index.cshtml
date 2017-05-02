@@ -6,6 +6,18 @@
 } 
 <h2>Welcome @Session["UserName"]</h2>
 <div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get)) {
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DropDownList("status", EnumHelper.GetSelectList(typeof(SMS.Data.enums.Status)), "Select Status", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-primary" value="Filter" />
+            </div>
+        </div>                              
+    }
+</div>
+<div>
     <table class="table table-bordered" id="table-dashboard">
         <thead>
             <tr>
@@ -25,7 +37,7 @@
             </tr>
         </thead>
         @foreach (var v in Model)
-        {
+    {
             <tr>
                 <td class="w5">@v.Id</td>
                 <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateEntered)</td>
@@ -33,46 +45,51 @@
                 <td class="w75">@v.Model</td>
                 <td class="w5">@v.Rego</td>
                 <td class="w5">@String.Format("{0:0,#}", v.Kilometers)</td>
-                <td class="w5 blue">@String.Format("{0:c}", v.CostPrice)</td>
+                <td class="w5 blue">@v.CostPrice</td>@*@String.Format("{0:c}", v.CostPrice)*@
                 <td class="w5 green">@String.Format("{0:c}", v.SellingPrice)</td>              
-                <td class="w15 red">
-                    <table class="table table-bordered table-striped table-condensed">
-                        <tbody>
+                <td class="w10 red">
+         
                         @{float total = 0;}
                         @foreach (var c in v.ExtraCost)
-                        {
-                                    @*<td>@c.Description</td>
-                                    <td>@String.Format("{0:c}", c.Cost)</td>
-                                    <td><button class="btn btn-sm">@Html.ActionLink("Update", "UpdateExtras", "Home", routeValues: new { e_id = c.Id}, htmlAttributes: null)</button></td>
-                                    <td>@using (Html.BeginForm("DeleteExtra", "Home", FormMethod.Post)) { @Html.Hidden("e_id", c.Id) <button type="submit" class="btn btn-danger">Delete</button>}</td>*@
-                                    total += c.Cost;                             
-                            }
-                            <tr>
+                        {                      
+                          total += c.Cost;                             
+                        }
                                 @if (total != 0)
                                 {
-                                <td align="left">Total: @String.Format("{0:c}", total)</td>
-                                <td align="center">@Html.ActionLink("View", "ExtraDetails", "Home", routeValues: new { id = v.Id}, htmlAttributes: new { @class = "btn btn-primary"})</td>
+                                @Html.ActionLink(String.Format("{0:c} |", total), "ExtraDetails", "Home", routeValues: new { id = v.Id}, htmlAttributes: new { @class = "red"})
                                 }
-                                <td align="right">@Html.ActionLink("Add Extras", "AddExtras", "Home", routeValues: new { id = v.Id }, htmlAttributes: new { @class = "btn btn-primary"})</td>
-                            </tr>                      
-                        </tbody>
-                    </table>
+                                @Html.ActionLink("Add", "AddExtras", "Home", routeValues: new { id = v.Id }, htmlAttributes: null)                                          
                 </td>
                 @{ 
                     float? profit = (v.SellingPrice - (v.CostPrice+ total));
                     float? profitPercentage = profit / (v.CostPrice + total) * 100;
                 }
-                <td class="w10">@String.Format("{0:c}", profit) | @profitPercentage%</td>
-                @*<td class="w5 @(v.IsSold ? "item-sold": "") @(v.IsPending? "item-pending": "") @(!v.IsSold && !v.IsPending ? "item-not-sold": "")">
-                    @{ if (v.IsSold) {<span class="v-status">Sold</span>}; if (v.IsPending) {<sapn class="v-status">Pending</sapn> }
-                        else if(!v.IsSold && !v.IsPending) { <span class="v-status">Available</span>}
+                <td class="w15">@String.Format("{0:c}", profit) / @profitPercentage%</td>
+                @{ 
+                    if(v.Status == 1)
+                    {
+                        <td class="w5 item-not-sold">Available</td>
                     }
-                </td>*@
-                <td class="w10">Status</td>
+                    if(v.Status == 2)
+                    {
+                        <td class="w5 item-sold">Sold</td>
+                    }
+                    if(v.Status == 3)
+                    {
+                        <td class="w5 item-pending">Pending</td>
+                    }
+                }
                 <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateSold)</td>
-                <td class="w10"></td>
+                <td class="w10">
+                    @using (Html.BeginForm("DeleteVehicle", "Home", FormMethod.Post))
+                    {
+                        @Html.Hidden("id", v.Id)
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                        @Html.ActionLink("Edit", "EditVehicle", "Home", routeValues: new { id = v.Id }, htmlAttributes: new { @class = "btn btn-primary"})
+                    }                   
+                </td>
             </tr>
         }
     </table>
-    @Html.PagedListPager(Model, page=>Url.Action("Index", "Home", routeValues: new { page}))
+    @Html.PagedListPager(Model, page=>Url.Action("Index", "Home", routeValues: new { page, filterby = Request.QueryString["filterby"], status = Request.QueryString["status"]}))
 </div>

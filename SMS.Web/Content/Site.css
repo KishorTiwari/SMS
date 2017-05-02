@@ -13,6 +13,9 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
+.btn{
+    font-size:10px;
+}
 
 /*width set by % */
 .w5{
@@ -90,12 +93,24 @@ textarea {
 
 .item-sold{
     background-color: forestgreen;
+    font-weight: 700;
+    padding: 10px;
+    color: white;
+    border:0px;
 }
 .item-not-sold {
     background-color: #808080;
+    font-weight: 700;
+    padding: 10px;
+    color: white;
+    border: 0px;
 }
-.item-pending{
+.item-pending {
     background-color: red;
+    font-weight: 700;
+    padding: 10px;
+    color: white;
+    border: 0px;
 } 
 .v-status{
     padding: 0px 10px;

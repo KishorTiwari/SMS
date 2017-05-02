@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMS.Data.Validations;
 
 namespace SMS.Data.ViewModels
 {
@@ -46,8 +47,10 @@ namespace SMS.Data.ViewModels
         [Required(ErrorMessage = "Please enter Registration Number")]
         [MaxLength(10)]
         [Display(Name = "Rego")]
+        [RegularExpression(@"\w+", ErrorMessage = "Please enter valid registration number.")]
         public string Rego { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Cost Price")]
         public float? CostPrice { get; set; }
 
@@ -56,8 +59,14 @@ namespace SMS.Data.ViewModels
 
         [Required]
         [Display(Name = "Status")]
-        [MaxLength(1)]
         public int Status { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+
+        [DateNow]
+        [StatusSold]
         public DateTime? DateSold { get; set; }
+
     }
 }
