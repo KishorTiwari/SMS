@@ -40,13 +40,13 @@
     {
             <tr>
                 <td class="w5">@v.Id</td>
-                <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateEntered)</td>
+                <td class="w75">@Html.DisplayFor(m => v.DateEntered)</td>
                 <td class="w75">@v.Make</td>
                 <td class="w75">@v.Model</td>
                 <td class="w5">@v.Rego</td>
-                <td class="w5">@String.Format("{0:0,#}", v.Kilometers)</td>
-                <td class="w5 blue">@v.CostPrice</td>@*@String.Format("{0:c}", v.CostPrice)*@
-                <td class="w5 green">@String.Format("{0:c}", v.SellingPrice)</td>              
+                <td class="w5">@Html.DisplayFor(m => v.Kilometers)</td> @*@String.Format("{0:0,#}", v.Kilometers)*@
+                <td class="w5 blue">@Html.DisplayFor(m=>v.CostPrice)</td>
+                <td class="w5 green">@Html.DisplayFor(m => v.SellingPrice)</td>              
                 <td class="w10 red">
          
                         @{float total = 0;}
@@ -79,7 +79,7 @@
                         <td class="w5 item-pending">Pending</td>
                     }
                 }
-                <td class="w75">@String.Format("{0: dd/MM/yyyy}", @v.DateSold)</td>
+                <td class="w75">@Html.DisplayFor(m => v.DateSold)</td>
                 <td class="w10">
                     @using (Html.BeginForm("DeleteVehicle", "Home", FormMethod.Post))
                     {

@@ -13,6 +13,7 @@ namespace SMS.Data.Models
 
         public int TraderId { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEntered { get; set; }
 
         [Required]       
@@ -24,6 +25,7 @@ namespace SMS.Data.Models
         public string Model { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:0,#}")]
         public int Kilometers { get; set; }
        
         [MaxLength(10)]
@@ -36,6 +38,7 @@ namespace SMS.Data.Models
 
         public int Status { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DateSold { get; set; }
         
         public virtual Trader Trader { get; set; }

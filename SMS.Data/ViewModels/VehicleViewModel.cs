@@ -41,6 +41,7 @@ namespace SMS.Data.ViewModels
         public string Model { get; set; }
 
         [Required(ErrorMessage = "Please enter Kilometers")]
+        [DisplayFormat(DataFormatString = "{0:0,#}")]
         [Display(Name = "Kilometers")]
         public int Kilometers { get; set; }
 
@@ -50,7 +51,7 @@ namespace SMS.Data.ViewModels
         [RegularExpression(@"\w+", ErrorMessage = "Please enter valid registration number.")]
         public string Rego { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:c}")]
+        [DataType(DataType.Currency)]
         [Display(Name = "Cost Price")]
         public float? CostPrice { get; set; }
 
@@ -62,8 +63,7 @@ namespace SMS.Data.ViewModels
         public int Status { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}")]
-
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DateNow]
         [StatusSold]
         public DateTime? DateSold { get; set; }
