@@ -35,6 +35,7 @@ namespace SMS.Data.ViewModels
         public string Description { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Cost { get; set; }
 
     }

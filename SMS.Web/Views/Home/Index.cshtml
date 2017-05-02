@@ -49,7 +49,7 @@
                 <td class="w5 green">@Html.DisplayFor(m => v.SellingPrice)</td>              
                 <td class="w10 red">
          
-                        @{float total = 0;}
+                        @{decimal total = 0;}
                         @foreach (var c in v.ExtraCost)
                         {                      
                           total += c.Cost;                             
@@ -61,10 +61,10 @@
                                 @Html.ActionLink("Add", "AddExtras", "Home", routeValues: new { id = v.Id }, htmlAttributes: null)                                          
                 </td>
                 @{ 
-                    float? profit = (v.SellingPrice - (v.CostPrice+ total));
-                    float? profitPercentage = profit / (v.CostPrice + total) * 100;
+                    decimal? profit = (v.SellingPrice - (v.CostPrice+ total));
+                    decimal? profitPercentage = profit / (v.CostPrice + total) * 100;
                 }
-                <td class="w15">@String.Format("{0:c}", profit) / @profitPercentage%</td>
+                <td class="w15">@String.Format("{0:c}", profit)</td>
                 @{ 
                     if(v.Status == 1)
                     {

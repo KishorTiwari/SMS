@@ -11,6 +11,7 @@ namespace SMS.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEntered { get; set; }
      
         public int TraderId { get; set; }
@@ -22,6 +23,7 @@ namespace SMS.Data.Models
         public string Description { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Cost { get; set; }
 
         public virtual Trader Trader { get; set; }

@@ -9,7 +9,7 @@
 <table class="table table-bordered" id="table-extra">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DateEntered) |
+            @Html.DisplayNameFor(model => model.DateEntered)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -19,12 +19,12 @@
         </th>
         <th>Action</th>
     </tr>
-    @{ float total = 0;}
+    @{ decimal total = 0;}
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DateEntered) | @Html.DisplayFor(m => item.Id)
+                @Html.DisplayFor(modelItem => item.DateEntered)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
