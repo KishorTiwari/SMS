@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SMS.Data.DAL;
+using SMS.Data.Validations;
 
 namespace SMS.Web.Controllers
 {
@@ -52,22 +53,26 @@ namespace SMS.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(TraderViewModel trader)
+        public ActionResult Register(TraderViewModel m)
         {
             if (ModelState.IsValid)
             {
                 using(SMSContext db = new SMSContext())
                 {
-                    AutoMapper.Mapper.Initialize(c =>
+                    var newTrader = new Trader
                     {
-                        c.CreateMap<TraderViewModel, Trader>();
-                    });
-                    var newTrader = AutoMapper.Mapper.Map<TraderViewModel, Trader>(trader);
+                        DateCreated = m.DateCreated,
+                        Name = m.Name,
+                        Address = m.Address,
+                        PhoneNumber = m.PhoneNumber,
+                        Email = m.Email,
+                        Password = Encryption.SHA1(m.Password + Salt.V2)   //using salt
+                    };
                     db.Trader.Add(newTrader);
                     db.SaveChanges();
                 }
                 ModelState.Clear();
-                ViewBag.Message = "Thank You !" + trader.Name + " has been successfully registered.";
+                ViewBag.Message = "Thank You !" + m.Name + " has been successfully registered.";
             }
             return View();
         }       
