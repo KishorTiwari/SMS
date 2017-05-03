@@ -12,8 +12,10 @@ namespace SMS.Data.enums
     {
         [Display(Name = "Available")]
         Available = 1,
+
         [Display(Name = "Sold")]
         Sold = 2,
+
         [Display(Name = "Sale Pending")]
         SalePending = 3
     }

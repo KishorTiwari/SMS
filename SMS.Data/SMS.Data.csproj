@@ -78,6 +78,18 @@
     <Compile Include="Migrations\201705020641066_data-type.Designer.cs">
       <DependentUpon>201705020641066_data-type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705030509597_salt for trader password.cs" />
+    <Compile Include="Migrations\201705030509597_salt for trader password.Designer.cs">
+      <DependentUpon>201705030509597_salt for trader password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030522575_hash the salt.cs" />
+    <Compile Include="Migrations\201705030522575_hash the salt.Designer.cs">
+      <DependentUpon>201705030522575_hash the salt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030524589_new salt property in trader class.cs" />
+    <Compile Include="Migrations\201705030524589_new salt property in trader class.Designer.cs">
+      <DependentUpon>201705030524589_new salt property in trader class.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExtraCost.cs" />
     <Compile Include="Validations\DateNowAttribute.cs" />
@@ -117,6 +129,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705020641066_data-type.resx">
       <DependentUpon>201705020641066_data-type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030509597_salt for trader password.resx">
+      <DependentUpon>201705030509597_salt for trader password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030522575_hash the salt.resx">
+      <DependentUpon>201705030522575_hash the salt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030524589_new salt property in trader class.resx">
+      <DependentUpon>201705030524589_new salt property in trader class.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

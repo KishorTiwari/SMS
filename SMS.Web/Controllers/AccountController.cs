@@ -15,7 +15,7 @@ namespace SMS.Web.Controllers
         int usr_id = 0;
         //Login
         public ActionResult Index()
-        {           
+        {
             return View();
         }
 
@@ -24,24 +24,25 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               using(SMSContext db = new SMSContext())
+                using (SMSContext db = new SMSContext())
                 {
                     try
                     {
-                        var usr = db.Trader.Single(x => x.Email == login.Email && x.Password == login.Password);
+                        var pswrd = Encryption.SHA1(login.Password + Salt.V2);
+                        var usr = db.Trader.Single(x => x.Email == login.Email && x.Password == pswrd);
                         if (usr != null)
                         {
-                            Session["UserId"] = usr.Id; 
+                            Session["UserId"] = usr.Id;
                             Session["UserName"] = usr.Name;
                             usr_id = usr.Id;
                             return RedirectToAction("Index", "Home");
                         }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         ViewBag.Message = "Inavlid Login. Please try again.";
                     }
-                    
+
                 }
             }
             return View();
@@ -57,8 +58,10 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using(SMSContext db = new SMSContext())
+                using (SMSContext db = new SMSContext())
                 {
+                    Random random = new Random();
+                    var salt = Encryption.SHA1(Convert.ToString(random.Next(9999, 99999)));
                     var newTrader = new Trader
                     {
                         DateCreated = m.DateCreated,
@@ -66,7 +69,8 @@ namespace SMS.Web.Controllers
                         Address = m.Address,
                         PhoneNumber = m.PhoneNumber,
                         Email = m.Email,
-                        Password = Encryption.SHA1(m.Password + Salt.V2)   //using salt
+                        Password = Encryption.SHA1(m.Password + salt),   //using salt
+                        Salt = salt
                     };
                     db.Trader.Add(newTrader);
                     db.SaveChanges();
@@ -75,6 +79,6 @@ namespace SMS.Web.Controllers
                 ViewBag.Message = "Thank You !" + m.Name + " has been successfully registered.";
             }
             return View();
-        }       
+        }
     }
 }

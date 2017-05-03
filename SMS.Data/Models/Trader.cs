@@ -35,6 +35,8 @@ namespace SMS.Data.Models
         [MaxLength(255)]
         public string Password { get; set; }
 
+        public string Salt { get; set; }
+
         [MaxLength(255)]
         public string TempPassword { get; set; }
 
