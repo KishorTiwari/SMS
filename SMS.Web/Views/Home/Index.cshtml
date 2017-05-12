@@ -27,13 +27,15 @@
                 <th class="w75">Model</th>
                 <th class="w5">Rego</th>
                 <th class="w5">Kilometers</th>
-                <th class="w5">Cost Price</th>
-                <th class="w5">S. Price</th>
-                <th class="w15">Extra Costs</th>
-                <th class="w10">Profit</th>
+                <th class="w10">Dealer</th>
+                <th class="w5">Vehicle Cost</th>
+                <th class="w75">Extra Cost</th>
+                <th class="w5">Total Cost</th>
+                <th class="w5">S.Price</th>
+                <th class="w5">Profit</th>
                 <th class="w5">Status</th>
                 <th class="w75">Sold Date</th>
-                <th class="w10">Action</th>
+                <th class="w20">Action</th>
             </tr>
         </thead>
         @foreach (var v in Model)
@@ -45,9 +47,9 @@
                 <td class="w75">@v.Model</td>
                 <td class="w5">@v.Rego</td>
                 <td class="w5">@Html.DisplayFor(m => v.Kilometers)</td> @*@String.Format("{0:0,#}", v.Kilometers)*@
-                <td class="w5 blue">@Html.DisplayFor(m=>v.CostPrice)</td>
-                <td class="w5 green">@Html.DisplayFor(m => v.SellingPrice)</td>              
-                <td class="w10 red">
+                <td class="w10">@Html.DisplayFor(m=> v.Dealer.Name)</td>
+                <td class="w5 red">@Html.DisplayFor(m=>v.CostPrice)</td>                    
+                <td class="w75 red">
          
                         @{decimal total = 0;}
                         @foreach (var c in v.ExtraCost)
@@ -64,7 +66,9 @@
                     decimal? profit = (v.SellingPrice - (v.CostPrice+ total));
                     decimal? profitPercentage = profit / (v.CostPrice + total) * 100;
                 }
-                <td class="w15">@String.Format("{0:c}", profit)</td>
+                <td class="red">@String.Format("{0:c}", (v.CostPrice + total))</td>
+                <td class="w5 green">@Html.DisplayFor(m => v.SellingPrice)</td>         
+                <td class="w5">@String.Format("{0:c}", profit)</td>
                 @{ 
                     if(v.Status == 1)
                     {
@@ -80,7 +84,7 @@
                     }
                 }
                 <td class="w75">@Html.DisplayFor(m => v.DateSold)</td>
-                <td class="w10">
+                <td class="w20">
                     @using (Html.BeginForm("DeleteVehicle", "Home", FormMethod.Post))
                     {
                         @Html.Hidden("id", v.Id)

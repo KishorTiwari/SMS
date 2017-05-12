@@ -27,10 +27,11 @@ namespace SMS.Web.Controllers
                 using (SMSContext db = new SMSContext())
                 {
                     try
-                    {
-                        var pswrd = Encryption.SHA1(login.Password + Salt.V2);
-                        var usr = db.Trader.Single(x => x.Email == login.Email && x.Password == pswrd);
-                        if (usr != null)
+                    {                
+                       
+                        var usr = db.Trader.Single(x => x.Email == login.Email);
+                        var pswrd = Encryption.SHA1(login.Password + usr.Salt);
+                        if (usr != null && usr.Password == pswrd)
                         {
                             Session["UserId"] = usr.Id;
                             Session["UserName"] = usr.Name;

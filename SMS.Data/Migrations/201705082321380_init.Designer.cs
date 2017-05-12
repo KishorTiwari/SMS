@@ -7,13 +7,13 @@ namespace SMS.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class newsaltpropertyintraderclass : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newsaltpropertyintraderclass));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705030524589_new salt property in trader class"; }
+            get { return "201705082321380_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -16,6 +16,7 @@ namespace SMS.Data.DAL
         public DbSet<Trader> Trader { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
         public DbSet<ExtraCost> ExtraCost { get; set; }
+        public DbSet<Dealer> Dealer { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

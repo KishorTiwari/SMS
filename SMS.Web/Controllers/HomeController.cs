@@ -27,7 +27,7 @@ namespace SMS.Web.Controllers
                 filterContext.Result = new RedirectResult("~/Account/");
             }
         }
-        //GET - Dashboard
+        // GET - Dashboard
         public ActionResult Index(int? page, int? status)
         {
             using (SMSContext db = new SMSContext())
@@ -36,14 +36,14 @@ namespace SMS.Web.Controllers
                 {
                     //var vehicleList = db.Vehicle.Include("ExtraCost").ToList();
 
-                    var vehicleList = from v in db.Vehicle.Include("ExtraCost")
+                    var vehicleList = from v in db.Vehicle.Include("ExtraCost").Include("Dealer")
                                       where v.TraderId == usr_id
                                       select v;
                     if (status != null)
                     {
                         vehicleList = vehicleList.Where(v => v.Status == status);
                     }
-                    return View(vehicleList.ToList().ToPagedList(page ?? 1, 5));
+                    return View(vehicleList.ToList().ToPagedList(page ?? 1, 20));
                 }
                 catch (NullReferenceException ex)
                 {
@@ -87,8 +87,10 @@ namespace SMS.Web.Controllers
                     CostPrice = v.CostPrice,
                     SellingPrice = v.SellingPrice,
                     Status = v.Status,
-                    DateSold = v.DateSold
+                    DateSold = v.DateSold,
+                    DealerId = v.DealerId
                 };
+                vm.Dealers =  db.Dealer.Where(d => d.TraderId == usr_id).ToList();
                 return View(vm);
             }
         }
@@ -99,7 +101,9 @@ namespace SMS.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                var vehicleViewModel = new VehicleViewModel();
+                vehicleViewModel.Dealers = db.Dealer.Where(d => d.TraderId == usr_id).ToList();
+                return View(vehicleViewModel);
             }
             using (var db = new SMSContext())
             {
@@ -112,10 +116,13 @@ namespace SMS.Web.Controllers
                 v.SellingPrice = vm.SellingPrice;
                 v.Status = vm.Status;
                 v.DateSold = vm.DateSold;
+                v.DealerId = vm.DealerId;
                 db.SaveChanges();
 
                 ModelState.Clear();
-                return View();
+                ViewBag.Message = "Vehicle Edited !";
+
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -135,8 +142,9 @@ namespace SMS.Web.Controllers
         //GET - Vehicle
         public ViewResult AddVehicle()
         {
-
-            return View();
+            var vehicleViewModel = new VehicleViewModel();
+            vehicleViewModel.Dealers = db.Dealer.Where(d => d.TraderId == usr_id).ToList();
+            return View(vehicleViewModel);
         }
 
         //POST - Vehicle
@@ -146,30 +154,32 @@ namespace SMS.Web.Controllers
             if (!ModelState.IsValid)
             {
                 return View();
-            }
-
-            var newVehicle = new Vehicle()
-            {
-                DateEntered = vehicle.DateEntered,
-                Make = vehicle.Make,
-                Model = vehicle.Model,
-                Kilometers = vehicle.Kilometers,
-                Rego = vehicle.Rego,
-                CostPrice = vehicle.CostPrice,
-                SellingPrice = vehicle.SellingPrice,
-                Status = vehicle.Status,
-                DateSold = vehicle.DateSold,
-                TraderId = Convert.ToInt32(Session["UserId"])
-            };
+            }          
             using (SMSContext db = new SMSContext())
             {
+                var newVehicle = new Vehicle()
+                {
+                    DateEntered = vehicle.DateEntered,
+                    Make = vehicle.Make,
+                    Model = vehicle.Model,
+                    Kilometers = vehicle.Kilometers,
+                    Rego = vehicle.Rego,
+                    CostPrice = vehicle.CostPrice,
+                    SellingPrice = vehicle.SellingPrice,
+                    Status = vehicle.Status,
+                    DateSold = vehicle.DateSold,
+                    TraderId = Convert.ToInt32(Session["UserId"]),
+                    DealerId = vehicle.DealerId
+                };
                 db.Vehicle.Add(newVehicle);
                 db.SaveChanges();
             }
             ModelState.Clear();
             ViewBag.Message = "Vehicle Added !";
 
-            return View();
+            var vehicleViewModel = new VehicleViewModel();
+            vehicleViewModel.Dealers = db.Dealer.Where(d => d.TraderId == usr_id).ToList();
+            return View(vehicleViewModel);
         }
 
         //Extras
@@ -279,6 +289,90 @@ namespace SMS.Web.Controllers
                 return View(extraList);
             }
         }
+        [HttpGet]
+        public ViewResult GetDealers()
+        {
+            var dealers = db.Dealer.Where(d => d.TraderId == usr_id).ToList();
+            if(dealers != null)
+            {
+                return View(dealers);
+            }
+            else
+            {
+                ModelState.AddModelError("nullError","You don't have any dealers.");
+                return View();
+            }
+        }
+        [HttpGet]
+        public ViewResult AddDealer()
+        {
+            var dealer = new DealerViewModel();           
+            return View(dealer);
+        }
+        [HttpPost]
+        public ActionResult AddDealer(DealerViewModel dealer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Dealer.Add(new Dealer
+                {
+                    Name = dealer.Name,
+                    TraderId = usr_id
+                });
+                db.SaveChanges();
+                return RedirectToAction("GetDealers");
+            }
+            else
+            {
+                return RedirectToAction("GetDealers");
+            }
+        }
+
+        [HttpGet]
+        public ViewResult UpdateDealer(int Id)
+        {
+            var dealer = db.Dealer.Single(d => d.TraderId == usr_id && d.Id == Id);
+            var newDealer = new DealerViewModel
+            {
+                Name = dealer.Name,
+                TraderId = dealer.TraderId,
+                Id = dealer.Id
+            };
+            return View(newDealer);
+        }
+        [HttpPost]
+        public ActionResult UpdateDealer(DealerViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var dealer = db.Dealer.Find(vm.Id);
+                dealer.Name = vm.Name;
+                dealer.TraderId = usr_id;
+                db.SaveChanges();
+                return RedirectToAction("GetDealers");
+            }
+            else
+            {
+                return RedirectToAction("GetDealers");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteDealer(int Id)
+        {
+            if (Id >= 1)
+            {
+                var dealer = db.Dealer.Find(Id);
+                db.Dealer.Remove(dealer);
+                db.SaveChanges();
+                return RedirectToAction("GetDealers");
+            }
+            else
+            {
+                return RedirectToAction("GetDealers");
+            }
+        }
+
 
     }
 }

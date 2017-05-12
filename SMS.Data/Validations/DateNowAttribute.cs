@@ -12,7 +12,7 @@ namespace SMS.Data.Validations
         public override bool IsValid(object value)
         {
             var dateTime = Convert.ToDateTime(value);
-            return (dateTime <= DateTime.Now) ;
+            return (dateTime <= DateTime.Now.AddDays(1));
         }
     }
 }

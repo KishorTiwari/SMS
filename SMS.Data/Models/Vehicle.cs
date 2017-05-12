@@ -13,6 +13,8 @@ namespace SMS.Data.Models
 
         public int TraderId { get; set; }
 
+        public int DealerId { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEntered { get; set; }
 
@@ -34,6 +36,7 @@ namespace SMS.Data.Models
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal? CostPrice { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal? SellingPrice { get; set; }
 
         public int Status { get; set; }
@@ -42,6 +45,7 @@ namespace SMS.Data.Models
         public DateTime? DateSold { get; set; }
         
         public virtual Trader Trader { get; set; }
+        public virtual Dealer Dealer { get; set; }
         public virtual ICollection<ExtraCost> ExtraCost { get; set; }
     }
 }

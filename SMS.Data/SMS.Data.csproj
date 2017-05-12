@@ -58,45 +58,23 @@
   <ItemGroup>
     <Compile Include="DAL\SMSContext.cs" />
     <Compile Include="enums\VehicleStatus.cs" />
-    <Compile Include="Migrations\201704230338221_init.cs" />
-    <Compile Include="Migrations\201704230338221_init.Designer.cs">
-      <DependentUpon>201704230338221_init.cs</DependentUpon>
+    <Compile Include="Migrations\201705082321380_init.cs" />
+    <Compile Include="Migrations\201705082321380_init.Designer.cs">
+      <DependentUpon>201705082321380_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704232054206_dateSold to Optional.cs" />
-    <Compile Include="Migrations\201704232054206_dateSold to Optional.Designer.cs">
-      <DependentUpon>201704232054206_dateSold to Optional.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704290551179_init1.cs" />
-    <Compile Include="Migrations\201704290551179_init1.Designer.cs">
-      <DependentUpon>201704290551179_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704290911174_init2.cs" />
-    <Compile Include="Migrations\201704290911174_init2.Designer.cs">
-      <DependentUpon>201704290911174_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705020641066_data-type.cs" />
-    <Compile Include="Migrations\201705020641066_data-type.Designer.cs">
-      <DependentUpon>201705020641066_data-type.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705030509597_salt for trader password.cs" />
-    <Compile Include="Migrations\201705030509597_salt for trader password.Designer.cs">
-      <DependentUpon>201705030509597_salt for trader password.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705030522575_hash the salt.cs" />
-    <Compile Include="Migrations\201705030522575_hash the salt.Designer.cs">
-      <DependentUpon>201705030522575_hash the salt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705030524589_new salt property in trader class.cs" />
-    <Compile Include="Migrations\201705030524589_new salt property in trader class.Designer.cs">
-      <DependentUpon>201705030524589_new salt property in trader class.cs</DependentUpon>
+    <Compile Include="Migrations\201705082333419_update delar.cs" />
+    <Compile Include="Migrations\201705082333419_update delar.Designer.cs">
+      <DependentUpon>201705082333419_update delar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Dealer.cs" />
     <Compile Include="Models\ExtraCost.cs" />
     <Compile Include="Validations\DateNowAttribute.cs" />
     <Compile Include="Validations\Encryption.cs" />
     <Compile Include="Validations\Salt.cs" />
     <Compile Include="Validations\StatusSoldAttribute.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DealerViewModel.cs" />
     <Compile Include="ViewModels\ExtraCostViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\Trader.cs" />
@@ -115,29 +93,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704230338221_init.resx">
-      <DependentUpon>201704230338221_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705082321380_init.resx">
+      <DependentUpon>201705082321380_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704232054206_dateSold to Optional.resx">
-      <DependentUpon>201704232054206_dateSold to Optional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704290551179_init1.resx">
-      <DependentUpon>201704290551179_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704290911174_init2.resx">
-      <DependentUpon>201704290911174_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705020641066_data-type.resx">
-      <DependentUpon>201705020641066_data-type.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705030509597_salt for trader password.resx">
-      <DependentUpon>201705030509597_salt for trader password.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705030522575_hash the salt.resx">
-      <DependentUpon>201705030522575_hash the salt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705030524589_new salt property in trader class.resx">
-      <DependentUpon>201705030524589_new salt property in trader class.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705082333419_update delar.resx">
+      <DependentUpon>201705082333419_update delar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

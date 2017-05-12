@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SMS.Data.Models.Dealer>
+
+@{
+    ViewBag.Title = "Dealers";
+}
+
+<h2>Dealers</h2>
+@Html.ValidationMessage("nullError")
+<p>
+    @Html.ActionLink("Add Dealer", "AddDealer")
+</p>
+<table class="table table-bordered mytable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Trader.Name)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateDealer", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteDealer", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

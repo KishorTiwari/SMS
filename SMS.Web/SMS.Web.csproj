@@ -229,6 +229,9 @@
     <Content Include="Views\Home\UpdateExtras.cshtml" />
     <Content Include="Views\Home\ExtraDetails.cshtml" />
     <Content Include="Views\Home\EditVehicle.cshtml" />
+    <Content Include="Views\Home\GetDealers.cshtml" />
+    <Content Include="Views\Home\AddDealer.cshtml" />
+    <Content Include="Views\Home\UpdateDealer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

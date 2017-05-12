@@ -13,71 +13,97 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.btn{
-    font-size:10px;
+.btn {
+    font-size: 10px;
+}
+
+.form-control, .btn {
+    border-radius: 0px;
 }
 
 /*width set by % */
-.w5{
+.w5 {
     width: 5%;
 }
-.w75{
+
+.w75 {
     width: 7.5%;
 }
-.w10{
+
+.w10 {
     width: 10%;
 }
-.w15{
+
+.w15 {
     width: 15%;
 }
+
 .w20 {
     width: 20%;
 }
+
 .w30 {
     width: 30%;
 }
+
 .w40 {
     width: 40%;
 }
+
 .w50 {
     width: 50%;
 }
+
 .w60 {
     width: 60%;
 }
+
 .w70 {
     width: 70%;
 }
+
 .w80 {
     width: 80%;
 }
+
 .w90 {
     width: 90%;
 }
+
 .w100 {
     width: 100%;
 }
-.blue{
+
+.blue {
     color: blue;
 }
-.green{
-    color:green;
+
+.green {
+    color: green;
 }
-.red{
-    color:red;
+
+.red {
+    color: red;
 }
-.borderless{
+
+.borderless {
     border-top: 0px;
     border: 0px;
 }
-body > .container{
+
+body > .container {
     margin-right: 20px;
     margin-left: 20px;
 }
 
-#table-dashboard th, #table-extra th {
-    background-color: #ffa400;
+.mytable th {
+    background-color: #6e888c;
 }
+
+#table-dashboard th, #table-extra th {
+    background-color: #6e888c;
+}
+
 #table-dashboard .table {
     margin-bottom: 0px;
 }
@@ -87,17 +113,19 @@ select,
 textarea {
     max-width: 280px;
 }
-.input-validation-error{
+
+.input-validation-error {
     border: 1px solid red;
 }
 
-.item-sold{
+.item-sold {
     background-color: forestgreen;
     font-weight: 700;
     padding: 10px;
     color: white;
-    border:0px;
+    border: 0px;
 }
+
 .item-not-sold {
     background-color: #808080;
     font-weight: 700;
@@ -105,24 +133,26 @@ textarea {
     color: white;
     border: 0px;
 }
+
 .item-pending {
     background-color: red;
     font-weight: 700;
     padding: 10px;
     color: white;
     border: 0px;
-} 
-.v-status{
+}
+
+.v-status {
     padding: 0px 10px;
     color: white;
     font-size: 13px;
-    font-weight:600;
+    font-weight: 600;
 }
 
 @media (min-width: 1200px) {
     .container {
         max-width: 100%;
-    } 
+    }
 }
 
 @media (min-width: 992px) {
@@ -130,4 +160,3 @@ textarea {
         max-width: 100%;
     }
 }
-

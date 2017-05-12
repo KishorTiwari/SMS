@@ -16,7 +16,7 @@ namespace SMS.Data.ViewModels
         public int Id { get; set; }
 
         public int TraderId { get; set; }
-
+        public int DealerId { get; set; }
         private DateTime _DateEntered = DateTime.UtcNow;
         public DateTime DateEntered
         {
@@ -68,5 +68,6 @@ namespace SMS.Data.ViewModels
         [StatusSold]
         public DateTime? DateSold { get; set; }
 
+        public IEnumerable<Dealer> Dealers { get; set; }
     }
 }
