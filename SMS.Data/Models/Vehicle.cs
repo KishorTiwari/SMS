@@ -43,6 +43,8 @@ namespace SMS.Data.Models
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DateSold { get; set; }
+
+        public int EngineSize { get; set; }
         
         public virtual Trader Trader { get; set; }
         public virtual Dealer Dealer { get; set; }

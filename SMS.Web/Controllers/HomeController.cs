@@ -362,10 +362,17 @@ namespace SMS.Web.Controllers
         {
             if (Id >= 1)
             {
-                var dealer = db.Dealer.Find(Id);
-                db.Dealer.Remove(dealer);
-                db.SaveChanges();
-                return RedirectToAction("GetDealers");
+                try
+                {
+                    var dealer = db.Dealer.Find(Id);
+                    db.Dealer.Remove(dealer);
+                    db.SaveChanges();
+                    return RedirectToAction("GetDealers");
+                }
+                catch(Exception)
+                {
+                    return RedirectToAction("GetDealers");
+                }
             }
             else
             {

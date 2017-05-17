@@ -1,0 +1,13 @@
+﻿<h3>{{Title}}</h3>
+<div >
+    <ul>
+        <li *ngFor="let t of Traders">
+            {{t}}+{{Dynamic}}
+        </li>
+    </ul>
+    
+</div>
+<div>
+    <input type="text" [(ngModel)]="Dynamic"/>
+    <button (click)="reset()" class="btn btn-default">Reset</button>
+</div>

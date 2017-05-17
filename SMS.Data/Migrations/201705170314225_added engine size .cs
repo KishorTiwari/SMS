@@ -1,0 +1,18 @@
+namespace SMS.Data.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class addedenginesize : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Vehicle", "EngineSize", c => c.Int(nullable: false));
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Vehicle", "EngineSize");
+        }
+    }
+}

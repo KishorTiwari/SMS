@@ -6,6 +6,10 @@
 
 <h2>Dealers</h2>
 @Html.ValidationMessage("nullError")
+@if(ViewBag.ErrorMsg != null)
+{
+    <h3 class="red">@ViewBag.ErrorMsg</h3>
+}
 <p>
     @Html.ActionLink("Add Dealer", "AddDealer")
 </p>

@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201705082333419_update delar.Designer.cs">
       <DependentUpon>201705082333419_update delar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705170314225_added engine size .cs" />
+    <Compile Include="Migrations\201705170314225_added engine size .Designer.cs">
+      <DependentUpon>201705170314225_added engine size .cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Dealer.cs" />
     <Compile Include="Models\ExtraCost.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705082333419_update delar.resx">
       <DependentUpon>201705082333419_update delar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705170314225_added engine size .resx">
+      <DependentUpon>201705170314225_added engine size .cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
